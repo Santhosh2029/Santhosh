@@ -1,0 +1,58 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+  <h2>Student Information Form</h2>
+  <form action="/after_add_marks" method="post">
+    <div class="form-box">
+      <label for="class">Class:</label>
+      <select id="class" name="class">
+        <option value="5">Class 5</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+      </select>
+
+      <label for="rollNo">Roll No:</label>
+      <input type="text" id="rollNo" name="rollNo" required>
+
+      <label for="exam_type">Exam Type:</label>
+      <select id="exam_type" name="exam_type">
+        <option value="Unit-1">Unit-1</option>
+        <option value="Unit-2">Unit-2</option>
+        <option value="Half-Yearly">Half-Yearly</option>
+        <option value="Annual">Annual</option>
+      </select>
+
+      <label for="studentName">Student Name:</label>
+      <input type="text" id="studentName" name="studentName" required>
+
+      <label for="section">Section:</label>
+      <input type="text" id="section" name="section" required>
+
+      <label for="telugu">Telugu:</label>
+      <input type="text" id="telugu" name="telugu" required>
+
+      <label for="english">English:</label>
+      <input type="text" id="english" name="english" required>
+
+      <label for="mathematics">Mathematics:</label>
+      <input type="text" id="mathematics" name="mathematics" required>
+
+      <label for="science">Science:</label>
+      <input type="text" id="science" name="science" required>
+
+      <label for="social">Social:</label>
+      <input type="text" id="social" name="social" required>
+    </div>
+
+    <input type="submit" value="Submit">
+    <div class="button-container">
+      <button><a href="/home">Go to Home</a></button>
+    </div>
+  </form>
+</body>
+</html>
+{%endblock%}

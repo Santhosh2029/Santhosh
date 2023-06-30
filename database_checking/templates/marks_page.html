@@ -1,0 +1,76 @@
+
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+    <div class="container">
+        <h1>Marks Page</h1>
+        <form action="/view_marks" method="POST">
+            <p>View Marks:</p>
+            <div class="form-row">
+                <label for="class">Class:</label>
+                <select id="class" name="class">
+                    <option value="5">Class 5</option>
+                    <option value="6">Class 6</option>
+                    <option value="7">Class 7</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="exam_type">Exam Type:</label>
+                <select id="exam_type" name="exam_type">
+                    <option value="Unit-1">Unit-1</option>
+                    <option value="Unit-2">Unit-2</option>
+                    <option value="Half-Yearly">Half-Yearly</option>
+                    <option value="Annual">Annual</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+
+        <form action="/edit_marks" method="POST">
+            <p>Edit Marks:</p>
+            <div class="form-row">
+                <label for="class">Class:</label>
+                <select id="class" name="class">
+                    <option value="5">Class 5</option>
+                    <option value="6">Class 6</option>
+                    <option value="7">Class 7</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="exam_type">Exam Type:</label>
+                <select id="exam_type" name="exam_type">
+                    <option value="Unit-1">Unit-1</option>
+                    <option value="Unit-2">Unit-2</option>
+                    <option value="Half-Yearly">Half-Yearly</option>
+                    <option value="Annual">Annual</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+
+
+        <div class="button-container">
+            <button><a href="/add_marks">Add Marks</a></button>
+        </div>
+        <!-- <div class="button-container">
+            <button><a href="/edit_marks">Edit Marks</a></button>
+        </div> -->
+        <div class="button-container">
+            <button><a href="/home">Go to Home</a></button>
+        </div>
+    </div>
+</body>
+</html>
+
+{%endblock%}

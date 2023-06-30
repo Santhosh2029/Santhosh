@@ -1,0 +1,62 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+    <h1>Studnet Marks</h1>
+    <br>
+    <h2>Class: {{ classs }}</h2>
+    <table>
+        <tr>
+            <!-- <th>Class</th> -->
+            <th>Roll No</th>
+            <th>Exam Type</th>
+            <th>Student Name</th>
+            <th>Section</th>
+            <th>Telugu</th>
+            <th>English</th>
+            <th>Mathematics</th>
+            <th>Science</th>
+            <th>Social</th>
+        </tr>
+        {% for class, roll,exam, student, section, telugu, english, maths, science, social in data %}
+            <tr>
+                <!-- <td>{{ class }}</td> -->
+                <td>{{ roll }}</td>
+                <td>{{ exam }}</td>
+                <td>{{ student }}</td>
+                <td>{{ section }}</td>
+                <td>{{ telugu }}</td>
+                <td>{{ english }}</td>
+                <td>{{ maths }}</td>
+                <td>{{ science }}</td>
+                <td>{{ social }}</td>
+                
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div class="button-container">
+        <button><a href="/home">Go to Home</a></button>
+        <button><a href="/add_marks">Add New Student Marks</a></button>
+        <button><a href="/academicinfo?class={{ result }},exam_type={{ exam_type }}">Edit Student Marks</a></button>
+    </div>
+    <br>
+    <!-- <form action="/student_info_delete" method="post">
+        <select name="class_info">  
+            <option disabled selected>Select a class</option> 
+            <option value="10">Class X</option>  
+            <option value="9">Class IX</option>  
+            <option value="8">Class VIII</option>  
+            <option value="7">Class VII</option>  
+            <option value="6">Class VI</option>  
+            <option value="5">Class V</option>  
+        </select>   
+        <button>Click here to delete student information</button>
+    </form> -->
+
+    <div class="home-image">
+        <img src="path_to_your_image.jpg" alt="Home Image">
+    </div>
+</body>
+</html>
+{%endblock%}

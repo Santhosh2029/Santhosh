@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+    <div class="container">
+      <h1 class="header-center">Home Page</h1>
+      <h2>High School</h2>
+  
+      <!-- <form action="/student_info?username={{ username }}" method="post"> -->
+      <form action="/student_info" method="post">
+        <label>
+          <h3>Student Information</h3>
+        </label>
+        <select name="class_info">
+          <option disabled selected>Select a class</option>
+          <option value="10">Class X</option>
+          <option value="9">Class IX</option>
+          <option value="8">Class VIII</option>
+          <option value="7">Class VII</option>
+          <option value="6">Class VI</option>
+          <option value="5">Class V</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+  
+      <form action="/academicinfo" method="POST">
+        <label>
+          <h3>Academic Information</h3>
+        </label>
+        <button><a href="/academicinfo">Click here</a></button>
+      </form>
+  
+      <form action="/attendanceinfo" method="POST">
+        <label>
+          <h3>Annual Attendance</h3>
+        </label>
+        <button><a href="/attendanceinfo">Click here</a></button>
+      </form>
+    </div>
+  
+    <div class="image-container">
+      <img src="https://example.com/path_to_your_image.jpg" alt="Image">
+    </div>
+  </body>
+{% endblock %}

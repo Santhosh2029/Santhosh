@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <select name="class_info">  
+      <!-- <option value="Class">Class</option>   -->
+      <option value="10">Class X</option>  
+      <option value="9">Class IX</option>  
+      <option value="8">Class VIII</option>  
+      <option value="7">Class VII</option>  
+      <option value="6">Class VI</option>  
+      <option value="5">Class V</option>  
+      </select> 
+      <!-- !-- The following tag input uses the type attribute which specifies the image, and the src attribute for specifying the path of an image, with the height and width attributes. -->
+      <input type="image" src="" name="submit" width="100" height="20" alt="submit"/>  
+  </form>  
+  </div>
+  <div class="center">
+    <button><a href="/marksnavigator"> Marks </a></button>
+  </div>
+  <div class="right">
+    <button><a href="/view_attentence_fillter"> Attendance</a> </a></button>
+  </div>
+  </form>  
+  </div>
+  </div>  
+  </form>  
+    <title>Marks Form</title>
+<hr>    
+  <body>
+    <form method="POST" action="/marks_data">
+      <label for="exam_type">Select Exam type:</label>
+      <select id="exam_type" name="exam_type">
+        <option value="Test_1">Test 1</option>
+        <option value="Test_2">Test 2</option>
+        <option value="Test_3">Test 3</option>
+      </select>
+      </head>
+      <label for="class"></label>
+      <input hidden type="text" id="cls" name="cls" value="{{cls}}">
+      <table>
+        <thead>
+          <tr>
+            <th>Roll Number</th>
+            <th>Name</th>
+            <th>English</th>
+            <th>Hindi</th>
+            <th>Telugu</th>
+            <th>Maths</th>
+            <th>Science</th>
+            <th>Social</th>
+            <!-- <th>Date of Attendance</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for roll_number, name,English,Hindi,Telugu,Maths,Science,Social in students %}
+          <tr>
+            <td>{{ roll_number }}</td>
+            <td>{{ name }}</td>
+            <td><input type="number" name="{{roll_number}}-English" min="0" max="100"></td>
+            <td><input type="number" name="{{roll_number}}-Hindi" min="0" max="100"></td>
+            <td><input type="number" name="{{roll_number}}-Telugu" min="0" max="100"></td>
+            <td><input type="number" name="{{roll_number}}-Maths" min="0" max="100"></td>
+            <td><input type="number" name="{{roll_number}}-Science" min="0" max="100"></td>
+            <td><input type="number" name="{{roll_number}}-Social" min="0" max="100"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>

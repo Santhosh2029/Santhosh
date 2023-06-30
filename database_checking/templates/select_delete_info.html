@@ -1,0 +1,97 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Students Information</h1>
+    <br>
+    <h2>Class: {{ result }}</h2>
+    <h2>Select the rows want to delete</h2>
+    <form action="/after_selecting_delte_info" method="POST">
+        <table>
+            <tr>
+                <th></th>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Section</th>
+                <th>Father Name</th>
+                <th>Mother Name</th>
+            </tr>
+            {% for student in students %}
+                <tr>
+                    <td><input type="checkbox" name="rollNo" value="{{ student[1] }}"></td>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[3] }}</td>
+                    <td>{{ student[4] }}</td>
+                    <td>{{ student[5] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <button>Delete secelcted</button>
+    </form>
+</body>
+</html> -->
+
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+    <h1>Students Information</h1>
+    <br>
+    <h2>Class: {{ result }}</h2>
+    <h2>Select the rows you want to delete</h2>
+    <form action="/after_selecting_delte_info" method="POST">
+        <input type="hidden" name="class_info" value="{{ result }}">
+        <table>
+            <tr>
+                <th></th>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Section</th>
+                <th>Father Name</th>
+                <th>Mother Name</th>
+            </tr>
+            {% for student in students %}
+                <tr>
+                    <td><input type="checkbox" name="rollNo" value="{{ student[1] }}"></td>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[3] }}</td>
+                    <td>{{ student[4] }}</td>
+                    <td>{{ student[5] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <button>Delete Selected</button>
+    </form>
+
+    <div class="button-container">
+        <button><a href="/home">Go to Home</a></button>
+        <button><a href="/student_info_update">Add New Student Information</a></button>
+        <button><a href="/student_info_edit">Edit Student Information</a></button>
+    </div>
+    <br>
+    <div class="home-image">
+        <img src="path_to_your_image.jpg" alt="Home Image">
+    </div>
+</body>
+</html>
+{%endblock%}

@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+	<h1>Send OTP</h1>
+
+	<div class="form-container">
+		<form action="/send_otp?mail = {{ mail }}" method="post">
+			<label for="email">Email:</label>
+			<input type="email" name="email" required>
+			<div class="button-container">
+				<button type="submit">Send OTP</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+
+{%endblock%}

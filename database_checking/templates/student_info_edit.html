@@ -1,0 +1,310 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        select {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            margin-right: 10px;
+        }
+
+        .home-image {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .edit-input {
+            border: none;
+            background-color: transparent;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .edit-input:focus {
+            outline: none;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Students Information</h1>
+    <br>
+    <h2>Class: {{ result }}</h2>
+    <table>
+        <tr>
+            <th>Roll No</th>
+            <th>Student Name</th>
+            <th>Section</th>
+            <th>Father Name</th>
+            <th>Mother Name</th>
+            <th>Action</th>
+        </tr>
+        {% for student in students %}
+            <tr id="{{student[1]}}">
+                <td >{{ student[1] }}</td>
+                <td >{{ student[2] }}</td>
+                <td >{{ student[3] }}</td>
+                <td >{{ student[4] }}</td>
+                <td >{{ student[5] }}</td>
+                <td><button onclick="enableEdit(this)">Edit</button></td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <script>
+        function enableEdit(button) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName('td');
+            
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var originalValue = cell.innerHTML;
+                
+                cell.setAttribute('data-original-value', originalValue);
+                cell.innerHTML = '<input type="text" class="edit-input" value="' + originalValue + '">';
+            }
+            
+            var saveButton = document.createElement('button');
+            saveButton.innerText = 'Save';
+            saveButton.onclick = function() {
+                saveStudentInfo(row.getAttribute(id));
+            };
+            
+            var cancelButton = document.createElement('button');
+            cancelButton.innerText = 'Cancel';
+            cancelButton.onclick = function() {
+                cancelEdit(row);
+            };
+            
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '';
+            actionCell.appendChild(saveButton);
+            actionCell.appendChild(cancelButton);
+        }
+        
+        function saveStudentInfo(row) {
+            var cells = row.getElementsByTagName('td');
+            
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var inputValue = cell.querySelector('input').value;
+                
+                cell.innerHTML = inputValue;
+            }
+            
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '<button onclick="enableEdit(this)">Edit</button>';
+        }
+        
+        function cancelEdit(row) {
+            var cells = row.getElementsByTagName('td');
+            
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var originalValue = cell.getAttribute('data-original-value');
+                
+                cell.innerHTML = originalValue;
+            }
+            
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '<button onclick="enableEdit(this)">Edit</button>';
+        }
+    </script>
+</body>
+</html>
+ -->
+
+
+ {% extends "base.html" %} 
+
+ {% block content %}
+<body>
+    <h1>Students Information</h1>
+    <form id="student-form" action="/after_student_info_edit?class_info={{ result }}" method="post">
+        <table>
+            <tr>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Section</th>
+                <th>Father Name</th>
+                <th>Mother Name</th>
+                <th>Action</th>
+            </tr>
+            {% for student in students %}
+                <tr id="{{student[1]}}">
+                    <td >{{ student[1] }}</td>
+                    <td >{{ student[2] }}</td>
+                    <td >{{ student[3] }}</td>
+                    <td >{{ student[4] }}</td>
+                    <td >{{ student[5] }}</td>
+                    <td><button onclick="enableEdit(this)">Edit</button></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div id="edited-info"></div>
+        <input type="hidden" name="edited-data" id="edited-data">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        var editedRows = [];
+
+        function enableEdit(button) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName('td');
+
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var originalValue = cell.innerHTML;
+
+                cell.setAttribute('data-original-value', originalValue);
+                cell.innerHTML = '<input type="text" class="edit-input" value="' + originalValue + '">';
+            }
+
+            var saveButton = document.createElement('button');
+            saveButton.innerText = 'Save';
+            saveButton.onclick = function() {
+                saveStudentInfo(row);
+            };
+
+            var cancelButton = document.createElement('button');
+            cancelButton.innerText = 'Cancel';
+            cancelButton.onclick = function() {
+                cancelEdit(row);
+            };
+
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '';
+            actionCell.appendChild(saveButton);
+            actionCell.appendChild(cancelButton);
+        }
+
+        function saveStudentInfo(row) {
+            var cells = row.getElementsByTagName('td');
+            var rowData = {};
+
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var inputValue = cell.querySelector('input').value;
+
+                cell.innerHTML = inputValue;
+                rowData[i] = inputValue;
+            }
+
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '<button onclick="enableEdit(this)">Edit</button>';
+
+            editedRows.push(rowData);
+            updateEditedInfo();
+        }
+
+        function cancelEdit(row) {
+            var cells = row.getElementsByTagName('td');
+
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var originalValue = cell.getAttribute('data-original-value');
+
+                cell.innerHTML = originalValue;
+            }
+
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '<button onclick="enableEdit(this)">Edit</button>';
+        }
+
+        function updateEditedInfo() {
+            var editedInfo = document.getElementById('edited-info');
+            editedInfo.innerHTML = '';
+
+            for (var i = 0; i < editedRows.length; i++) {
+                var rowData = editedRows[i];
+                editedInfo.innerHTML += JSON.stringify(rowData) + '<br>';
+            }
+
+            // Update the hidden input field in the form with the edited data
+            document.getElementById('edited-data').value = JSON.stringify(editedRows);
+        }
+    </script>
+    <div class="button-container">
+        <button><a href="/home">Go to Home</a></button>
+        <button><a href="/student_info_update">Add New Student Information</a></button>
+    </div>
+</body>
+</html>
+
+{%endblock%}

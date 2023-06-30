@@ -1,0 +1,132 @@
+
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+    <h1>Students Information</h1>
+    <h2>Class: {{ result }}</h2>
+    <form id="student-form" action="/after_edit_marks?class={{ result }},exam_type={{ exam_type }}" method="post">
+    <table>
+        <tr>
+            <!-- <th>Class</th> -->
+            <th>Roll No</th>
+            <th>Exam Type</th>
+            <th>Student Name</th>
+            <th>Section</th>
+            <th>Telugu</th>
+            <th>English</th>
+            <th>Mathematics</th>
+            <th>Science</th>
+            <th>Social</th>
+            <th>Action</th>
+        </tr>
+        {% for class, roll,exam, student, section, telugu, english, maths, science, social in students %}
+            <tr>
+                <!-- <td>{{ class }}</td> -->
+                <td>{{ roll }}</td>
+                <td>{{ exam }}</td>
+                <td>{{ student }}</td>
+                <td>{{ section }}</td>
+                <td>{{ telugu }}</td>
+                <td>{{ english }}</td>
+                <td>{{ maths }}</td>
+                <td>{{ science }}</td>
+                <td>{{ social }}</td>
+                <td><button onclick="enableEdit(this)">Edit</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div id="edited-info"></div>
+        <input type="hidden" name="edited-data" id="edited-data">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        var editedRows = [];
+
+        function enableEdit(button) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName('td');
+
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var originalValue = cell.innerHTML;
+
+                cell.setAttribute('data-original-value', originalValue);
+                cell.innerHTML = '<input type="text" class="edit-input" value="' + originalValue + '">';
+            }
+
+            var saveButton = document.createElement('button');
+            saveButton.innerText = 'Save';
+            saveButton.onclick = function() {
+                saveStudentInfo(row);
+            };
+
+            var cancelButton = document.createElement('button');
+            cancelButton.innerText = 'Cancel';
+            cancelButton.onclick = function() {
+                cancelEdit(row);
+            };
+
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '';
+            actionCell.appendChild(saveButton);
+            actionCell.appendChild(cancelButton);
+        }
+
+        function saveStudentInfo(row) {
+            var cells = row.getElementsByTagName('td');
+            var rowData = {};
+
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var inputValue = cell.querySelector('input').value;
+
+                cell.innerHTML = inputValue;
+                rowData[i] = inputValue;
+            }
+
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '<button onclick="enableEdit(this)">Edit</button>';
+
+            editedRows.push(rowData);
+            updateEditedInfo();
+        }
+
+        function cancelEdit(row) {
+            var cells = row.getElementsByTagName('td');
+
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var originalValue = cell.getAttribute('data-original-value');
+
+                cell.innerHTML = originalValue;
+            }
+
+            var actionCell = cells[cells.length - 1];
+            actionCell.innerHTML = '<button onclick="enableEdit(this)">Edit</button>';
+        }
+
+        function updateEditedInfo() {
+            var editedInfo = document.getElementById('edited-info');
+            editedInfo.innerHTML = '';
+
+            for (var i = 0; i < editedRows.length; i++) {
+                var rowData = editedRows[i];
+                editedInfo.innerHTML += JSON.stringify(rowData) + '<br>';
+            }
+
+            // Update the hidden input field in the form with the edited data
+            document.getElementById('edited-data').value = JSON.stringify(editedRows);
+        }
+    </script>
+    <div class="button-container">
+        <button><a href="/home">Go to Home</a></button>
+        <button><a href="/student_info_update">Add New Student Information</a></button>
+    </div>
+</body>
+</html>
+
+{%endblock%}

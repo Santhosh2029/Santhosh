@@ -1,0 +1,35 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+  <h2>Student Information Form</h2>
+  <form action="/after_student_info_update" method="post">
+    <div class="form-box">
+      <label for="class_info">Class:</label>
+      <input type="text" id="class_info" name="class_info" required>
+
+      <label for="rollNo">Roll No:</label>
+      <input type="text" id="rollNo" name="rollNo" required>
+
+      <label for="studentName">Student Name:</label>
+      <input type="text" id="studentName" name="studentName" required>
+
+      <label for="section">Section:</label>
+      <input type="text" id="section" name="section" required>
+
+      <label for="fatherName">Father Name:</label>
+      <input type="text" id="fatherName" name="fatherName" required>
+
+      <label for="motherName">Mother Name:</label>
+      <input type="text" id="motherName" name="motherName" required>
+    </div>
+
+    <input type="submit" value="Submit">
+    <div class="button-container">
+      <button><a href="/home">Go to Home</a></button>
+    </div>
+  </form>
+</body>
+</html>
+
+{%endblock%}

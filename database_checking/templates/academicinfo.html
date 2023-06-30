@@ -1,0 +1,78 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+	<!-- Header -->
+	<div class="header">
+		<a href="/home"><img src="home.png"></a>
+		<h1>Marks Page</h1>
+	</div>
+	<!-- Center Division -->
+	<div class="center">
+		<form  action="/marks_data_entry" method = "POST">    
+			<h2>Record Marks</h2>
+			<select name="marks_update">  
+			<option value="Class">Class</option>  
+			<option value="10">Class X</option>  
+			<option value="9">Class IX</option>  
+			<option value="8">Class VIII</option>  
+			<option value="7">Class VII</option>  
+			<option value="6">Class VI</option>  
+			<option value="5">Class V</option>  
+			</select> 
+			<br>
+			<!-- !-- The following tag input uses the type attribute which specifies the image, and the src attribute for specifying the path of an image, with the height and width attributes. -->
+			<input type="image" src="" name="submit" width="100" height="48" alt="submit"/>  
+		</form> 
+		<hr>
+		
+		<div >
+			<form  action="/marks_data_change" method = "POST">    
+				<h2>Change Marks</h2>
+				<select name="marks_change_class">  
+				<option value="Class">Class</option>  
+				<option value="10">Class X</option>  
+				<option value="9">Class IX</option>  
+				<option value="8">Class VIII</option>  
+				<option value="7">Class VII</option>  
+				<option value="6">Class VI</option>  
+				<option value="5">Class V</option>  
+				</select> 
+				<h3>Exam_Type</h3>
+				<select name="exam_type">  
+					<option value="exam_type">Test_type</option>  
+					<option value="Test_1">Test_1</option>  
+					<option value="Test_2">Test_2</option>  
+					<option value="Test_3">Test_3</option>  
+				</select>
+				<br>
+				<input type="image" src="" name="submit" width="100" height="48" alt="submit"/> 
+			</form>
+		<hr>
+		<form  action="/marksinfoCLASS" method = "POST">    
+			<h2>View Marks</h2>
+			<select name="marks_info">  
+				<option value="Class">Class</option>  
+				<option value="10">Class X</option>  
+				<option value="9">Class IX</option>  
+				<option value="8">Class VIII</option>  
+				<option value="7">Class VII</option>  
+				<option value="6">Class VI</option>  
+				<option value="5">Class V</option>
+			</select>
+			<h2>Exam_Type</h2>
+			<select name="exam_type">  
+				<option value="exam_type">Class</option>  
+				<option value="Test_1">Test_1</option>  
+				<option value="Test_2">Test_2</option>  
+				<option value="Test_3">Test_3</option>  
+			</select>
+			<br>
+			<input type="image" src="" name="submit" width="100" height="48" alt="submit"/>  
+		</form> 
+	</head>
+
+</body>
+</html>
+
+{% endblock %}

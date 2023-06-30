@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<body>
+    <h1>Students Information</h1>
+    <br>
+    <h2>Class: {{ result }}</h2>
+    <table>
+        <tr>
+            <th>Roll No</th>
+            <th>Student Name</th>
+            <th>Section</th>
+            <th>Father Name</th>
+            <th>Mother Name</th>
+        </tr>
+        {% for id, roll_no, name, sec, father, mother in students %}
+            <tr>
+                <td>{{ roll_no }}</td>
+                <td>{{ name }}</td>
+                <td>{{ sec }}</td>
+                <td>{{ father }}</td>
+                <td>{{ mother }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div class="button-container">
+        <button><a href="/home">Go to Home</a></button>
+        <button><a href="/student_info_update">Add New Student Information</a></button>
+        <button><a href="/student_info_edit?class_info={{ result }}">Edit Student Information</a></button>
+    </div>
+    <br>
+    <form action="/student_info_delete" method="post">
+        <select name="class_info">  
+            <option disabled selected>Select a class</option> 
+            <option value="10">Class X</option>  
+            <option value="9">Class IX</option>  
+            <option value="8">Class VIII</option>  
+            <option value="7">Class VII</option>  
+            <option value="6">Class VI</option>  
+            <option value="5">Class V</option>  
+        </select>   
+        <button>Click here to delete student information</button>
+    </form>
+
+    <div class="home-image">
+        <img src="path_to_your_image.jpg" alt="Home Image">
+    </div>
+</body>
+</html>
+
+{%endblock%}
